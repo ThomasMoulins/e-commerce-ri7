@@ -13,11 +13,20 @@ const Navbar = () => {
     color: #fff;
     display: flex;
     justify-content: space-between;
+    align-items: center;
   `;
 
-  const CartIcon = styled.div`
+  const NavLinks = styled.div`
+    display: flex;
+    align-items: center;
+  `;
+
+  const CartIcon = styled(Link)`
     position: relative;
-    cursor: pointer;
+    color: #fff;
+    text-decoration: none;
+    font-size: 24px;
+    margin-left: 16px;
   `;
 
   const CartCount = styled.span`
@@ -36,10 +45,16 @@ const Navbar = () => {
       <Link to="/" style={{ color: "#fff", textDecoration: "none" }}>
         Shop
       </Link>
-      <CartIcon>
-        🛒
-        {cartItems.length > 0 && <CartCount>{cartItems.length}</CartCount>}
-      </CartIcon>
+      <NavLinks>
+        <CartIcon to="/cart">
+          🛒
+          {cartItems.length > 0 && (
+            <CartCount>
+              {cartItems.reduce((total, item) => total + item.quantity, 0)}
+            </CartCount>
+          )}
+        </CartIcon>
+      </NavLinks>
     </Nav>
   );
 };

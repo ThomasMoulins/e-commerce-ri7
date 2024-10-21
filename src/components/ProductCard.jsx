@@ -99,7 +99,7 @@ const ProductCard = ({ products }) => {
             </Category>
           </PriceCategoryContainer>
           <AddToCartButton onClick={() => addToCart(product)}>
-            Ajouter au caddie
+            Ajouter au Panier
           </AddToCartButton>
         </Card>
       ))}
