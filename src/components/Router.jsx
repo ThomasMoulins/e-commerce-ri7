@@ -1,16 +1,21 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Home";
-import Category from "./Category";
+import Category from "./category";
+import { CartProvider } from "./CartContext";
+import Navbar from "./Navbar";
 
 const Router = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* PUBLIC ROUTES */}
-        <Route path="/" element={<Home />} />
-        <Route path="/category/:category" element={<Category />} />
-      </Routes>
-    </BrowserRouter>
+    <CartProvider>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          {/* PUBLIC ROUTES */}
+          <Route path="/" element={<Home />} />
+          <Route path="/category/:category" element={<Category />} />
+        </Routes>
+      </BrowserRouter>
+    </CartProvider>
   );
 };
 

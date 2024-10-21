@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { CartContext } from "./CartContext";
 
 const ProductCard = ({ products }) => {
+  const { addToCart } = useContext(CartContext);
+
   if (!Array.isArray(products)) {
     return <p>No products available</p>;
   }
@@ -56,6 +60,19 @@ const ProductCard = ({ products }) => {
     margin: 0;
   `;
 
+  const AddToCartButton = styled.button`
+    background-color: #007b00;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    margin-top: 8px;
+    border-radius: 4px;
+    &:hover {
+      background-color: #005500;
+    }
+  `;
+
   const CardContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
@@ -81,6 +98,9 @@ const ProductCard = ({ products }) => {
               </Link>
             </Category>
           </PriceCategoryContainer>
+          <AddToCartButton onClick={() => addToCart(product)}>
+            Ajouter au caddie
+          </AddToCartButton>
         </Card>
       ))}
     </CardContainer>
