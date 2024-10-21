@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const ProductCard = ({ products }) => {
   if (!Array.isArray(products)) {
@@ -9,7 +10,7 @@ const ProductCard = ({ products }) => {
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 350px;
+    width: 400px;
     height: auto;
     padding: 16px;
     margin: 16px;
@@ -74,7 +75,11 @@ const ProductCard = ({ products }) => {
                 currency: "EUR",
               }).format(product.price)}
             </Price>
-            <Category>{product.category}</Category>
+            <Category>
+              <Link to={`/category/${product.category}`}>
+                {product.category}
+              </Link>
+            </Category>
           </PriceCategoryContainer>
         </Card>
       ))}
