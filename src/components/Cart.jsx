@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import { CartContext } from "./CartContext";
+import QuantityControl from "./QuantityControl";
 
 const CartContainer = styled.div`
   padding: 16px;
@@ -14,20 +15,24 @@ const CartItem = styled.div`
   padding-bottom: 16px;
 `;
 
-const ProductImage = styled.img`
-  width: 80px;
-  height: 80px;
-  object-fit: scale-down;
+const ImageWrapper = styled.div`
+  width: 100px;
+  height: 120px;
+  border-radius: 16px;
+  background-color: white;
   margin-right: 16px;
+  padding: 1rem;
+`;
+
+const ProductImage = styled.img`
+  width: 100px;
+  height: 120px;
+  border-radius: 16px;
+  object-fit: scale-down;
 `;
 
 const ProductDetails = styled.div`
   flex-grow: 1;
-`;
-
-const QuantityInput = styled.input`
-  width: 50px;
-  margin-right: 8px;
 `;
 
 const RemoveButton = styled.button`
@@ -50,11 +55,14 @@ const TotalPrice = styled.h2`
 const Cart = () => {
   const { cartItems, removeFromCart, updateQuantity } = useContext(CartContext);
 
-  const handleQuantityChange = (e, id) => {
-    const value = parseInt(e.target.value);
-    if (value > 0) {
-      updateQuantity(id, value);
+  const handleDecrease = (id, quantity) => {
+    if (quantity > 1) {
+      updateQuantity(id, quantity - 1);
     }
+  };
+
+  const handleIncrease = (id, quantity) => {
+    updateQuantity(id, quantity + 1);
   };
 
   if (cartItems.length === 0) {
@@ -66,7 +74,9 @@ const Cart = () => {
       <h1>Votre Panier</h1>
       {cartItems.map((item) => (
         <CartItem key={item.id}>
-          <ProductImage src={item.image} alt={item.title} />
+          <ImageWrapper>
+            <ProductImage src={item.image} alt={item.title} />
+          </ImageWrapper>
           <ProductDetails>
             <h2>{item.title}</h2>
             <p>
@@ -85,11 +95,10 @@ const Cart = () => {
             </p>
           </ProductDetails>
           <div>
-            <QuantityInput
-              type="number"
-              min="1"
-              value={item.quantity}
-              onChange={(e) => handleQuantityChange(e, item.id)}
+            <QuantityControl
+              quantity={item.quantity}
+              onDecrease={() => handleDecrease(item.id, item.quantity)}
+              onIncrease={() => handleIncrease(item.id, item.quantity)}
             />
             <RemoveButton onClick={() => removeFromCart(item.id)}>
               Supprimer
