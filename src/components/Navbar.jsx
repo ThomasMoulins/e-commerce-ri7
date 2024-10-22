@@ -1,6 +1,6 @@
 // Navbar.js
 import { useContext, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { CartContext } from "./CartContext";
 import { SearchContext } from "./SearchContext";
@@ -92,8 +92,10 @@ const Navbar = () => {
   const [categories, setCategories] = useState([]);
   const [isCategoriesLoaded, setIsCategoriesLoaded] = useState(false);
   const [categoriesError, setCategoriesError] = useState(null);
+  const location = useLocation();
 
   useEffect(() => {
+    setSearchQuery("");
     fetch("https://fakestoreapi.com/products/categories")
       .then((res) => res.json())
       .then(
@@ -110,7 +112,7 @@ const Navbar = () => {
           setIsCategoriesLoaded(true);
         }
       );
-  }, []);
+  }, [location.pathname]);
 
   return (
     <Nav>
