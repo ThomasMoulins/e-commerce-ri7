@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { CartContext } from "./CartContext";
+import { toast } from "react-toastify";
 
 const ProductCard = ({ products }) => {
   const { addToCart } = useContext(CartContext);
@@ -79,6 +80,11 @@ const ProductCard = ({ products }) => {
     justify-content: center;
   `;
 
+  const handleAddToCart = (product) => {
+    addToCart(product);
+    toast.success(`${product.title} a été ajouté au panier !`);
+  };
+
   return (
     <CardContainer>
       {products.map((product) => (
@@ -98,7 +104,7 @@ const ProductCard = ({ products }) => {
               </Link>
             </Category>
           </PriceCategoryContainer>
-          <AddToCartButton onClick={() => addToCart(product)}>
+          <AddToCartButton onClick={() => handleAddToCart(product)}>
             Ajouter au Panier
           </AddToCartButton>
         </Card>

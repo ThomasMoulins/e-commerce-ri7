@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
+import styled from "styled-components";
+
+const MainContent = styled.div`
+  margin-top: 64px; /* Compense la hauteur de la navbar */
+`;
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -29,10 +34,10 @@ const Home = () => {
     return <div>Chargement...</div>;
   } else {
     return (
-      <>
+      <MainContent>
         <h1>SHOP</h1>
         <ProductCard products={products} />
-      </>
+      </MainContent>
     );
   }
 };

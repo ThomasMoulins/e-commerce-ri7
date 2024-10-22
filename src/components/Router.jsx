@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "./CartContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Home from "./Home";
 import Category from "./category";
 import Navbar from "./Navbar";
@@ -10,6 +12,7 @@ const Router = () => {
     <CartProvider>
       <BrowserRouter>
         <Navbar />
+        <ToastContainer style={{ marginTop: "6rem" }} />
         <Routes>
           {/* PUBLIC ROUTES */}
           <Route path="/" element={<Home />} />
