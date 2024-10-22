@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import ProductCard from "./ProductCard";
+import { SearchContext } from "./SearchContext";
 
 const Category = () => {
   const [products, setProducts] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
   const location = useLocation();
+  const { searchQuery } = useContext(SearchContext);
 
   // Extraire la catégorie du chemin
   const pathname = location.pathname;
@@ -35,6 +37,10 @@ const Category = () => {
       );
   }, [decodedCategory]);
 
+  const filteredProducts = products.filter((product) =>
+    product.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   if (error) {
     return <div>Erreur : {error.message}</div>;
   } else if (!isLoaded) {
@@ -48,7 +54,8 @@ const Category = () => {
     return (
       <>
         <h1>{decodedCategory}</h1>
-        <ProductCard products={products} />
+        {searchQuery && <h2>Résultats pour : "{searchQuery}"</h2>}
+        <ProductCard products={filteredProducts} />
       </>
     );
   }

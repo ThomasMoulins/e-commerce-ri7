@@ -3,9 +3,92 @@ import { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { CartContext } from "./CartContext";
+import { SearchContext } from "./SearchContext";
+
+const Nav = styled.nav`
+  background-color: #333;
+  padding: 1rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  z-index: 1000;
+`;
+
+const LeftSection = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 2rem;
+`;
+
+const CenterSection = styled.div`
+  flex: 4;
+  display: flex;
+  justify-content: center;
+`;
+
+const RightSection = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 2rem;
+`;
+
+const CategoryLinks = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+`;
+
+const CategoryLink = styled(Link)`
+  color: #fff;
+  text-decoration: none;
+  margin: 0 8px;
+  white-space: nowrap;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+const CartIcon = styled(Link)`
+  position: relative;
+  color: #fff;
+  text-decoration: none;
+  font-size: 24px;
+`;
+
+const CartCount = styled.span`
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: red;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-size: 12px;
+`;
+
+const SearchForm = styled.form`
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+`;
+
+const SearchInput = styled.input`
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: none;
+  font-size: 1rem;
+`;
 
 const Navbar = () => {
   const { cartItems } = useContext(CartContext);
+  const { searchQuery, setSearchQuery } = useContext(SearchContext);
   const [categories, setCategories] = useState([]);
   const [isCategoriesLoaded, setIsCategoriesLoaded] = useState(false);
   const [categoriesError, setCategoriesError] = useState(null);
@@ -28,74 +111,6 @@ const Navbar = () => {
         }
       );
   }, []);
-
-  const Nav = styled.nav`
-    background-color: #333;
-    padding: 1rem;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    z-index: 1000;
-  `;
-
-  const LeftSection = styled.div`
-    flex: 1;
-    display: flex;
-    justify-content: flex-start;
-    padding-left: 2rem;
-  `;
-
-  const CenterSection = styled.div`
-    flex: 1;
-    display: flex;
-    justify-content: center;
-  `;
-
-  const RightSection = styled.div`
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 2rem;
-  `;
-
-  const CategoryLinks = styled.div`
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-  `;
-
-  const CategoryLink = styled(Link)`
-    color: #fff;
-    text-decoration: none;
-    margin: 0 8px;
-    white-space: nowrap;
-    &:hover {
-      text-decoration: underline;
-    }
-  `;
-
-  const CartIcon = styled(Link)`
-    position: relative;
-    color: #fff;
-    text-decoration: none;
-    font-size: 24px;
-  `;
-
-  const CartCount = styled.span`
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    background-color: red;
-    color: white;
-    padding: 2px 6px;
-    border-radius: 50%;
-    font-size: 12px;
-  `;
 
   return (
     <Nav>
@@ -120,6 +135,15 @@ const Navbar = () => {
             <div>Chargement des catégories...</div>
           )}
         </CategoryLinks>
+        {/* Barre de recherche */}
+        <SearchForm onSubmit={(e) => e.preventDefault()}>
+          <SearchInput
+            type="text"
+            placeholder="Rechercher..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </SearchForm>
       </CenterSection>
       <RightSection>
         <CartIcon to="/cart">

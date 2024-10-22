@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import ProductCard from "./ProductCard";
 import styled from "styled-components";
+import { SearchContext } from "./SearchContext";
 
 const MainContent = styled.div`
   margin-top: 64px; /* Compense la hauteur de la navbar */
@@ -10,6 +11,7 @@ const Home = () => {
   const [products, setProducts] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
+  const { searchQuery } = useContext(SearchContext);
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
@@ -28,6 +30,10 @@ const Home = () => {
       );
   }, []);
 
+  const filteredProducts = products.filter((product) =>
+    product.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   if (error) {
     return <div>Erreur : {error.message}</div>;
   } else if (!isLoaded) {
@@ -36,7 +42,8 @@ const Home = () => {
     return (
       <MainContent>
         <h1>SHOP</h1>
-        <ProductCard products={products} />
+        {searchQuery && <h2>Résultats pour : "{searchQuery}"</h2>}
+        <ProductCard products={filteredProducts} />
       </MainContent>
     );
   }
