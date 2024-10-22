@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import ProductCard from "./ProductCard";
 import { SearchContext } from "./SearchContext";
+import { quantum } from "ldrs";
 
 const Category = () => {
   const [products, setProducts] = useState([]);
@@ -9,6 +10,7 @@ const Category = () => {
   const [error, setError] = useState(null);
   const location = useLocation();
   const { searchQuery } = useContext(SearchContext);
+  quantum.register();
 
   // Extraire la catégorie du chemin
   const pathname = location.pathname;
@@ -47,12 +49,7 @@ const Category = () => {
   if (error) {
     return <div>Erreur : {error.message}</div>;
   } else if (!isLoaded) {
-    return (
-      <>
-        <h1>{decodedCategory}</h1>
-        <div>Chargement...</div>
-      </>
-    );
+    return <l-quantum size="150" speed="1.5" color="white"></l-quantum>;
   } else {
     return (
       <>
