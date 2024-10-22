@@ -30,9 +30,12 @@ const Home = () => {
       );
   }, []);
 
-  const filteredProducts = products.filter((product) =>
-    product.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredProducts =
+    searchQuery.length > 2
+      ? products.filter((product) =>
+          product.title.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      : products;
 
   if (error) {
     return <div>Erreur : {error.message}</div>;
@@ -42,7 +45,9 @@ const Home = () => {
     return (
       <MainContent>
         <h1>SHOP</h1>
-        {searchQuery && <h2>Résultats pour : "{searchQuery}"</h2>}
+        {searchQuery && searchQuery.length > 2 && (
+          <h2>Résultats pour : "{searchQuery}"</h2>
+        )}
         <ProductCard products={filteredProducts} />
       </MainContent>
     );

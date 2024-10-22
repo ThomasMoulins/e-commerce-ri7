@@ -1,9 +1,10 @@
 // Navbar.js
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useCallback } from "react";
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { CartContext } from "./CartContext";
 import { SearchContext } from "./SearchContext";
+import { debounce } from "lodash";
 
 const Nav = styled.nav`
   background-color: #333;
@@ -88,11 +89,26 @@ const SearchInput = styled.input`
 
 const Navbar = () => {
   const { cartItems } = useContext(CartContext);
-  const { searchQuery, setSearchQuery } = useContext(SearchContext);
+  const { setSearchQuery } = useContext(SearchContext);
   const [categories, setCategories] = useState([]);
   const [isCategoriesLoaded, setIsCategoriesLoaded] = useState(false);
   const [categoriesError, setCategoriesError] = useState(null);
+  const [localSearchQuery, setLocalSearchQuery] = useState("");
   const location = useLocation();
+
+  // Débounce de 500 ms
+  const debouncedSetSearchQuery = useCallback(
+    debounce((query) => {
+      setSearchQuery(query);
+    }, 500),
+    [setSearchQuery]
+  );
+
+  const handleSearchChange = (e) => {
+    const query = e.target.value;
+    setLocalSearchQuery(query);
+    debouncedSetSearchQuery(query);
+  };
 
   useEffect(() => {
     setSearchQuery("");
@@ -142,8 +158,8 @@ const Navbar = () => {
           <SearchInput
             type="text"
             placeholder="Rechercher..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            value={localSearchQuery}
+            onChange={handleSearchChange}
           />
         </SearchForm>
       </CenterSection>
