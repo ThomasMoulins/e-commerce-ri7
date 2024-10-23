@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { CartProvider } from "./CartContext";
-import { SearchProvider } from "./SearchContext";
+import { CartProvider } from "./Cart/CartContext";
+import { SearchProvider } from "./Navbar/SearchContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Home from "./Home";

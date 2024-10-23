@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import ProductCard from "./ProductCard";
 import styled from "styled-components";
-import { SearchContext } from "./SearchContext";
+import { SearchContext } from "./Navbar/SearchContext";
 import { quantum } from "ldrs";
 
 const MainContent = styled.div`

@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import ProductCard from "./ProductCard";
-import { SearchContext } from "./SearchContext";
+import { SearchContext } from "./Navbar/SearchContext";
 import { quantum } from "ldrs";
 
 const Category = () => {

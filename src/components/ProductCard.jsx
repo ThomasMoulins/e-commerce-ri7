@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { CartContext } from "./CartContext";
+import { CartContext } from "./Cart/CartContext";
 import { toast } from "react-toastify";
 
 const ProductCard = ({ products }) => {
