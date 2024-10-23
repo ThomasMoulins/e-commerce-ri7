@@ -30,24 +30,35 @@ const QuantityButton = styled.button`
   }
 `;
 
-const QuantityDisplay = styled.span`
+const QuantityInput = styled.input`
   margin: 0 8px;
   font-size: 16px;
-  min-width: 32px;
+  width: 60px;
   text-align: center;
   border: 1px solid #ddd;
   padding: 4px 8px;
   border-radius: 4px;
+  &:disabled {
+    color: white;
+  }
 `;
 
-const QuantityControl = ({ quantity, onDecrease, onIncrease }) => {
+const QuantityControl = ({ quantity, onDecrease, onIncrease, maxQuantity }) => {
   return (
     <QuantityWrapper>
       <QuantityButton onClick={onDecrease} disabled={quantity <= 1}>
         -
       </QuantityButton>
-      <QuantityDisplay>{quantity}</QuantityDisplay>
-      <QuantityButton onClick={onIncrease}>+</QuantityButton>
+      <QuantityInput
+        type="text"
+        min="1"
+        max={maxQuantity}
+        value={quantity}
+        disabled
+      />
+      <QuantityButton onClick={onIncrease} disabled={quantity >= maxQuantity}>
+        +
+      </QuantityButton>
     </QuantityWrapper>
   );
 };

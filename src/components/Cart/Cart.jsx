@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import { CartContext } from "./CartContext";
+import { StockContext } from "../Stock/StockContext";
 import QuantityControl from "./QuantityControl";
 
 const CartContainer = styled.div`
@@ -54,6 +55,7 @@ const TotalPrice = styled.h2`
 
 const Cart = () => {
   const { cartItems, removeFromCart, updateQuantity } = useContext(CartContext);
+  const { stockLevels } = useContext(StockContext);
 
   const handleDecrease = (id, quantity) => {
     if (quantity > 1) {
@@ -62,7 +64,12 @@ const Cart = () => {
   };
 
   const handleIncrease = (id, quantity) => {
-    updateQuantity(id, quantity + 1);
+    const stock = stockLevels[id] || 0;
+    if (stock > 0) {
+      updateQuantity(id, quantity + 1);
+    } else {
+      alert(`Stock insuffisant.`);
+    }
   };
 
   if (cartItems.length === 0) {
@@ -99,6 +106,7 @@ const Cart = () => {
               quantity={item.quantity}
               onDecrease={() => handleDecrease(item.id, item.quantity)}
               onIncrease={() => handleIncrease(item.id, item.quantity)}
+              maxQuantity={(stockLevels[item.id] || 0) + item.quantity}
             />
             <RemoveButton onClick={() => removeFromCart(item.id)}>
               Supprimer
