@@ -61,6 +61,7 @@ const CartIcon = styled(Link)`
   color: #fff;
   text-decoration: none;
   font-size: 24px;
+  padding-left: 2rem;
 `;
 
 const CartCount = styled.span`
@@ -164,6 +165,7 @@ const Navbar = () => {
         </SearchForm>
       </CenterSection>
       <RightSection>
+        <CartIcon to="/stock">📦</CartIcon>
         <CartIcon to="/cart">
           🛒
           {cartItems.length > 0 && (

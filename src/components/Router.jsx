@@ -9,6 +9,7 @@ import Home from "./Home";
 import Category from "./category";
 import Navbar from "./Navbar/Navbar";
 import Cart from "./Cart/Cart";
+import StockManagement from "./Stock/StockManagement";
 
 const Router = () => {
   return (
@@ -23,6 +24,7 @@ const Router = () => {
                 {/* PUBLIC ROUTES */}
                 <Route path="/" element={<Home />} />
                 <Route path="/category/:category" element={<Category />} />
+                <Route path="/stock" element={<StockManagement />} />
                 <Route path="/cart" element={<Cart />} />
               </Routes>
             </BrowserRouter>
