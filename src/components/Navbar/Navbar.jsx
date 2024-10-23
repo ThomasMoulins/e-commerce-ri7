@@ -2,7 +2,7 @@
 import { useContext, useState, useEffect, useCallback } from "react";
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
-import { CartContext } from "./Cart/CartContext";
+import { CartContext } from "../Cart/CartContext";
 import { SearchContext } from "./SearchContext";
 import { debounce } from "lodash";
 

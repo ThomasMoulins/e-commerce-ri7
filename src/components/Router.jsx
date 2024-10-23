@@ -5,8 +5,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Home from "./Home";
 import Category from "./category";
-import Navbar from "./Navbar";
-import Cart from "./Cart";
+import Navbar from "./Navbar/Navbar";
+import Cart from "./Cart/Cart";
 
 const Router = () => {
   return (
