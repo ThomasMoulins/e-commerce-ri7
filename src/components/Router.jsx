@@ -7,21 +7,24 @@ import Home from "./Home";
 import Category from "./category";
 import Navbar from "./Navbar/Navbar";
 import Cart from "./Cart/Cart";
+import { ProductsProvider } from "./Stock/ProductsContext";
 
 const Router = () => {
   return (
     <CartProvider>
       <SearchProvider>
-        <BrowserRouter>
-          <Navbar />
-          <ToastContainer style={{ marginTop: "6rem" }} />
-          <Routes>
-            {/* PUBLIC ROUTES */}
-            <Route path="/" element={<Home />} />
-            <Route path="/category/:category" element={<Category />} />
-            <Route path="/cart" element={<Cart />} />
-          </Routes>
-        </BrowserRouter>
+        <ProductsProvider>
+          <BrowserRouter>
+            <Navbar />
+            <ToastContainer style={{ marginTop: "6rem" }} />
+            <Routes>
+              {/* PUBLIC ROUTES */}
+              <Route path="/" element={<Home />} />
+              <Route path="/category/:category" element={<Category />} />
+              <Route path="/cart" element={<Cart />} />
+            </Routes>
+          </BrowserRouter>
+        </ProductsProvider>
       </SearchProvider>
     </CartProvider>
   );

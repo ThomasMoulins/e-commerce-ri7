@@ -1,7 +1,8 @@
-import { useEffect, useState, useContext } from "react";
+import { useContext } from "react";
 import ProductCard from "./ProductCard";
 import styled from "styled-components";
 import { SearchContext } from "./Navbar/SearchContext";
+import { ProductsContext } from "./Stock/ProductsContext";
 import { quantum } from "ldrs";
 
 const MainContent = styled.div`
@@ -9,28 +10,9 @@ const MainContent = styled.div`
 `;
 
 const Home = () => {
-  const [products, setProducts] = useState([]);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [error, setError] = useState(null);
+  const { products, isLoaded, error } = useContext(ProductsContext);
   const { searchQuery } = useContext(SearchContext);
   quantum.register();
-
-  useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          console.log(result);
-          setIsLoaded(true);
-          setProducts(result);
-        },
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-          console.log(error);
-        }
-      );
-  }, []);
 
   const filteredProducts =
     searchQuery.length > 2
