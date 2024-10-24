@@ -108,14 +108,14 @@ const StockCard = ({ products }) => {
                 )}
               </StockInfo>
               <ButtonContainer>
-                <StockButton onClick={() => updateStock(product.id, stock + 1)}>
-                  +
-                </StockButton>
                 <StockButton
                   onClick={() => updateStock(product.id, stock - 1)}
                   disabled={stock === 0}
                 >
                   -
+                </StockButton>
+                <StockButton onClick={() => updateStock(product.id, stock + 1)}>
+                  +
                 </StockButton>
               </ButtonContainer>
             </Card>
