@@ -29,9 +29,9 @@ const Title = styled.h2`
   margin-bottom: 8px;
   color: #333;
   text-align: center;
-  display: flex; /* Ajout de Flexbox */
-  align-items: center; /* Centre verticalement */
-  justify-content: center; /* Centre horizontalement */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const StockInfo = styled.p`

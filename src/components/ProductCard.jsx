@@ -26,14 +26,15 @@ const ProductImage = styled.img`
 `;
 
 const Title = styled.h2`
-  height: 6rem;
+  height: 5rem;
   font-size: 18px;
   margin: 0;
   margin-bottom: 8px;
   color: #333;
-  text-align: start;
+  text-align: center;
   display: flex;
   align-items: center;
+  justify-content: center;
 `;
 
 const PriceCategoryContainer = styled.div`
