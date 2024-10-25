@@ -10,6 +10,8 @@ import Category from "./category";
 import Navbar from "./Navbar/Navbar";
 import Cart from "./Cart/Cart";
 import StockManagement from "./Stock/StockManagement";
+import Success from "./Cart/Success";
+import Cancel from "./Cart/Cancel";
 
 const Router = () => {
   return (
@@ -26,6 +28,8 @@ const Router = () => {
                 <Route path="/category/:category" element={<Category />} />
                 <Route path="/stock" element={<StockManagement />} />
                 <Route path="/cart" element={<Cart />} />
+                <Route path="/success" element={<Success />} />
+                <Route path="/cancel" element={<Cancel />} />
               </Routes>
             </BrowserRouter>
           </SearchProvider>

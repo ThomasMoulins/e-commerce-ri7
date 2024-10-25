@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { CartContext } from "./CartContext";
 import { StockContext } from "../Stock/StockContext";
 import QuantityControl from "./QuantityControl";
+import Checkout from "./Checkout";
 
 const CartContainer = styled.div`
   padding: 16px;
@@ -126,6 +127,7 @@ const Cart = () => {
           )
         )}
       </TotalPrice>
+      <Checkout />
     </CartContainer>
   );
 };
