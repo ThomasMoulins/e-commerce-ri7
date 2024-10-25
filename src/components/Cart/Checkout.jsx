@@ -3,6 +3,20 @@
 import { useContext } from "react";
 import { CartContext } from "./CartContext";
 import { useStripe } from "@stripe/react-stripe-js";
+import styled from "styled-components";
+
+const CheckoutButton = styled.button`
+  background-color: #007b00;
+  color: #fff;
+  border: none;
+  padding: 16px 32px;
+  cursor: pointer;
+  margin-top: 8px;
+  border-radius: 4px;
+  &:hover {
+    background-color: #005500;
+  }
+`;
 
 const Checkout = () => {
   const { cartItems } = useContext(CartContext);
@@ -38,7 +52,7 @@ const Checkout = () => {
     }
   };
 
-  return <button onClick={handleCheckout}>Payer avec Stripe</button>;
+  return <CheckoutButton onClick={handleCheckout}>Payer</CheckoutButton>;
 };
 
 export default Checkout;

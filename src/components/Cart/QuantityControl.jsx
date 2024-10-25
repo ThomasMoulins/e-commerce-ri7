@@ -31,6 +31,7 @@ const QuantityButton = styled.button`
 `;
 
 const QuantityInput = styled.input`
+  background-color: inherit;
   margin: 0 8px;
   font-size: 16px;
   width: 60px;
@@ -39,7 +40,7 @@ const QuantityInput = styled.input`
   padding: 4px 8px;
   border-radius: 4px;
   &:disabled {
-    color: white;
+    color: inherit;
   }
 `;
 

@@ -5,10 +5,6 @@ import { StockContext } from "../Stock/StockContext";
 import QuantityControl from "./QuantityControl";
 import Checkout from "./Checkout";
 
-const CartContainer = styled.div`
-  padding: 16px;
-`;
-
 const CartItem = styled.div`
   display: flex;
   align-items: center;
@@ -74,11 +70,16 @@ const Cart = () => {
   };
 
   if (cartItems.length === 0) {
-    return <CartContainer>Votre panier est vide.</CartContainer>;
+    return (
+      <>
+        <h1>Votre Panier</h1>
+        <h2>Votre panier est vide.</h2>
+      </>
+    );
   }
 
   return (
-    <CartContainer>
+    <>
       <h1>Votre Panier</h1>
       {cartItems.map((item) => (
         <CartItem key={item.id}>
@@ -128,7 +129,7 @@ const Cart = () => {
         )}
       </TotalPrice>
       <Checkout />
-    </CartContainer>
+    </>
   );
 };
 

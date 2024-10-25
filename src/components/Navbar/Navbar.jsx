@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { CartContext } from "../Cart/CartContext";
 import { SearchContext } from "./SearchContext";
 import { debounce } from "lodash";
+import { ThemeContext } from "../ThemeContext";
 
 const Nav = styled.nav`
   background-color: #333;
@@ -56,12 +57,28 @@ const CategoryLink = styled(Link)`
   }
 `;
 
+const ThemeToggleButton = styled.button`
+  padding: 0;
+  position: relative;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 24px;
+  margin-right: 5%;
+  margin-left: 5%;
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
 const CartIcon = styled(Link)`
   position: relative;
   color: #fff;
   text-decoration: none;
   font-size: 24px;
-  padding-left: 2rem;
+  margin-right: 5%;
+  margin-left: 5%;
 `;
 
 const CartCount = styled.span`
@@ -89,6 +106,7 @@ const SearchInput = styled.input`
 `;
 
 const Navbar = () => {
+  const { theme, toggleTheme } = useContext(ThemeContext);
   const { cartItems } = useContext(CartContext);
   const { setSearchQuery } = useContext(SearchContext);
   const [categories, setCategories] = useState([]);
@@ -101,7 +119,7 @@ const Navbar = () => {
   const debouncedSetSearchQuery = useCallback(
     debounce((query) => {
       setSearchQuery(query);
-    }, 500),
+    }, 100),
     [setSearchQuery]
   );
 
@@ -165,6 +183,9 @@ const Navbar = () => {
         </SearchForm>
       </CenterSection>
       <RightSection>
+        <ThemeToggleButton onClick={toggleTheme}>
+          {theme === "light" ? "🌙" : "☀️"}
+        </ThemeToggleButton>
         <CartIcon to="/stock">📦</CartIcon>
         <CartIcon to="/cart">
           🛒
