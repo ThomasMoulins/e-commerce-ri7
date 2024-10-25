@@ -1,11 +1,13 @@
+// React
 import { createContext, useState, useContext } from "react";
-import { StockContext } from "../Stock/StockContext";
+// Éléments/pages
+import { ProductsContext } from "../Stock/ProductsContext";
 
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
-  const { stockLevels, updateStock } = useContext(StockContext);
+  const { stockLevels, updateStock } = useContext(ProductsContext);
 
   const addToCart = (product) => {
     const stock = stockLevels[product.id] || 0;

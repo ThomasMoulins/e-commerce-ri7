@@ -1,7 +1,8 @@
-// Checkout.js
-
+// React
 import { useContext } from "react";
+// Contexte
 import { CartContext } from "./CartContext";
+// Externe
 import { useStripe } from "@stripe/react-stripe-js";
 import styled from "styled-components";
 

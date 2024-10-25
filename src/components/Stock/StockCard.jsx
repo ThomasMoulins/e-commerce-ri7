@@ -1,6 +1,9 @@
-import styled from "styled-components";
+// React
 import { useContext } from "react";
-import { StockContext } from "./StockContext";
+// Contexte
+import { ProductsContext } from "./ProductsContext";
+// Externe
+import styled from "styled-components";
 
 const Card = styled.div`
   border: 1px solid #e0e0e0;
@@ -82,7 +85,7 @@ const CardContainer = styled.div`
 `;
 
 const StockCard = ({ products }) => {
-  const { stockLevels, updateStock } = useContext(StockContext);
+  const { stockLevels, updateStock } = useContext(ProductsContext);
 
   if (!Array.isArray(products)) {
     return <p>No products available</p>;

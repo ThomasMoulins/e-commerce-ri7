@@ -1,15 +1,18 @@
+// React
 import { useContext } from "react";
-import ProductCard from "./ProductCard";
+// Contexte
 import { ThemeContext } from "./ThemeContext";
-import { SearchContext } from "./Navbar/SearchContext";
 import { ProductsContext } from "./Stock/ProductsContext";
+// Externe
 import { quantum } from "ldrs";
+// // Éléments/pages
+import ProductCard from "./ProductCard";
 
 const Home = () => {
   const { theme } = useContext(ThemeContext);
   const color = theme === "light" ? "black" : "white";
   const { products, isLoaded, error } = useContext(ProductsContext);
-  const { searchQuery } = useContext(SearchContext);
+  const { searchQuery } = useContext(ProductsContext);
   quantum.register();
 
   const filteredProducts =

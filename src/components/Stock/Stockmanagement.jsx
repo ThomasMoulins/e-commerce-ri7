@@ -1,12 +1,15 @@
+// react
 import { useContext } from "react";
-import StockCard from "./StockCard";
-import { SearchContext } from "../Navbar/SearchContext";
+// Contexte
 import { ProductsContext } from "./ProductsContext";
+// Externe
 import { quantum } from "ldrs";
+// Éléments/pages
+import StockCard from "./StockCard";
 
 const StockManagement = () => {
-  const { products, isLoaded, error } = useContext(ProductsContext);
-  const { searchQuery } = useContext(SearchContext);
+  const { products, isLoaded, error, searchQuery } =
+    useContext(ProductsContext);
   quantum.register();
 
   const filteredProducts =

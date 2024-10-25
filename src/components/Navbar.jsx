@@ -1,11 +1,13 @@
-// Navbar.js
+// React
 import { useContext, useState, useEffect, useCallback } from "react";
+// Contexte
+import { ThemeContext } from "./ThemeContext";
+import { ProductsContext } from "./Stock/ProductsContext";
+import { CartContext } from "./Cart/CartContext";
+// Externe
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
-import { CartContext } from "../Cart/CartContext";
-import { SearchContext } from "./SearchContext";
 import { debounce } from "lodash";
-import { ThemeContext } from "../ThemeContext";
 
 const Nav = styled.nav`
   background-color: #333;
@@ -108,14 +110,14 @@ const SearchInput = styled.input`
 const Navbar = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { cartItems } = useContext(CartContext);
-  const { setSearchQuery } = useContext(SearchContext);
+  const { setSearchQuery } = useContext(ProductsContext);
   const [categories, setCategories] = useState([]);
   const [isCategoriesLoaded, setIsCategoriesLoaded] = useState(false);
   const [categoriesError, setCategoriesError] = useState(null);
   const [localSearchQuery, setLocalSearchQuery] = useState("");
   const location = useLocation();
 
-  // Débounce de 500 ms
+  // Débounce de 100 ms
   const debouncedSetSearchQuery = useCallback(
     debounce((query) => {
       setSearchQuery(query);
@@ -131,6 +133,7 @@ const Navbar = () => {
 
   useEffect(() => {
     setSearchQuery("");
+    setLocalSearchQuery("");
     fetch("https://fakestoreapi.com/products/categories")
       .then((res) => res.json())
       .then(
@@ -183,11 +186,13 @@ const Navbar = () => {
         </SearchForm>
       </CenterSection>
       <RightSection>
-        <ThemeToggleButton onClick={toggleTheme}>
+        <ThemeToggleButton onClick={toggleTheme} aria-label="Toggle theme">
           {theme === "light" ? "🌙" : "☀️"}
         </ThemeToggleButton>
-        <CartIcon to="/stock">📦</CartIcon>
-        <CartIcon to="/cart">
+        <CartIcon to="/stock" aria-label="Stock">
+          📦
+        </CartIcon>
+        <CartIcon to="/cart" aria-label="Panier">
           🛒
           {cartItems.length > 0 && (
             <CartCount>

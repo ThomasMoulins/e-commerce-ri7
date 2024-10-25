@@ -1,3 +1,4 @@
+// Externe
 import styled from "styled-components";
 
 const QuantityWrapper = styled.div`

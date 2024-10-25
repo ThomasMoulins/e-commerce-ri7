@@ -1,7 +1,11 @@
+// React
 import { useContext } from "react";
-import styled from "styled-components";
+// Contexte
 import { CartContext } from "./CartContext";
-import { StockContext } from "../Stock/StockContext";
+import { ProductsContext } from "../Stock/ProductsContext";
+// Externe
+import styled from "styled-components";
+// Éléments/pages
 import QuantityControl from "./QuantityControl";
 import Checkout from "./Checkout";
 
@@ -52,7 +56,7 @@ const TotalPrice = styled.h2`
 
 const Cart = () => {
   const { cartItems, removeFromCart, updateQuantity } = useContext(CartContext);
-  const { stockLevels } = useContext(StockContext);
+  const { stockLevels } = useContext(ProductsContext);
 
   const handleDecrease = (id, quantity) => {
     if (quantity > 1) {

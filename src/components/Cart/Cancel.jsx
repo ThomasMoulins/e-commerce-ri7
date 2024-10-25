@@ -1,5 +1,3 @@
-// Cancel.js
-
 const Cancel = () => {
   return (
     <div>

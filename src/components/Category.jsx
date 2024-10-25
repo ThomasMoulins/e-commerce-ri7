@@ -1,17 +1,20 @@
+// React
 import { useContext } from "react";
-import { useLocation } from "react-router-dom";
-import ProductCard from "./ProductCard";
+// Contexte
 import { ThemeContext } from "./ThemeContext";
 import { ProductsContext } from "./Stock/ProductsContext";
-import { SearchContext } from "./Navbar/SearchContext";
+// Externe
+import { useLocation } from "react-router-dom";
 import { quantum } from "ldrs";
+// Éléments/pages
+import ProductCard from "./ProductCard";
 
 const Category = () => {
   const { theme } = useContext(ThemeContext);
   const color = theme === "light" ? "black" : "white";
   const { products, isLoaded, error } = useContext(ProductsContext);
+  const { searchQuery } = useContext(ProductsContext);
   const location = useLocation();
-  const { searchQuery } = useContext(SearchContext);
   quantum.register();
 
   // Extrait la catégorie du chemin

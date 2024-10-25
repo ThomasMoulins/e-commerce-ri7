@@ -1,8 +1,12 @@
+// React
+import { useContext } from "react";
+// Contexte
+import { ProductsContext } from "./Stock/ProductsContext";
+import { CartContext } from "./Cart/CartContext";
+// Externe
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { CartContext } from "./Cart/CartContext";
-import { StockContext } from "./Stock/StockContext";
+
 import { toast } from "react-toastify";
 
 const Card = styled.div`
@@ -88,7 +92,7 @@ const CardContainer = styled.div`
 
 const ProductCard = ({ products }) => {
   const { addToCart } = useContext(CartContext);
-  const { stockLevels, updateStock } = useContext(StockContext);
+  const { stockLevels, updateStock } = useContext(ProductsContext);
 
   if (!Array.isArray(products)) {
     return <p>No products available</p>;
