@@ -1,10 +1,13 @@
 import { useContext } from "react";
 import ProductCard from "./ProductCard";
+import { ThemeContext } from "./ThemeContext";
 import { SearchContext } from "./Navbar/SearchContext";
 import { ProductsContext } from "./Stock/ProductsContext";
 import { quantum } from "ldrs";
 
 const Home = () => {
+  const { theme } = useContext(ThemeContext);
+  const color = theme === "light" ? "black" : "white";
   const { products, isLoaded, error } = useContext(ProductsContext);
   const { searchQuery } = useContext(SearchContext);
   quantum.register();
@@ -19,7 +22,13 @@ const Home = () => {
   if (error) {
     return <div>Erreur : {error.message}</div>;
   } else if (!isLoaded) {
-    return <l-quantum size="150" speed="1.5" color="white"></l-quantum>;
+    return (
+      <>
+        <h1>
+          <l-quantum size="150" speed="1.5" color={color}></l-quantum>
+        </h1>
+      </>
+    );
   } else {
     return (
       <>

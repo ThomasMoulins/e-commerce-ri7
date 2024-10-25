@@ -1,11 +1,14 @@
 import { useContext } from "react";
 import { useLocation } from "react-router-dom";
 import ProductCard from "./ProductCard";
+import { ThemeContext } from "./ThemeContext";
 import { ProductsContext } from "./Stock/ProductsContext";
 import { SearchContext } from "./Navbar/SearchContext";
 import { quantum } from "ldrs";
 
 const Category = () => {
+  const { theme } = useContext(ThemeContext);
+  const color = theme === "light" ? "black" : "white";
   const { products, isLoaded, error } = useContext(ProductsContext);
   const location = useLocation();
   const { searchQuery } = useContext(SearchContext);
@@ -33,7 +36,13 @@ const Category = () => {
   if (error) {
     return <div>Erreur : {error.message}</div>;
   } else if (!isLoaded) {
-    return <l-quantum size="150" speed="1.5" color="white"></l-quantum>;
+    return (
+      <>
+        <h1>
+          <l-quantum size="150" speed="1.5" color={color}></l-quantum>
+        </h1>
+      </>
+    );
   } else {
     return (
       <>
