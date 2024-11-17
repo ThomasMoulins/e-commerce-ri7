@@ -22,12 +22,12 @@ const CheckoutButton = styled.button`
 const Checkout = () => {
   const { cartItems } = useContext(CartContext);
   const stripe = useStripe();
-  const SERVER_PORT = import.meta.env.VITE_SERVER_PORT;
+  const SERVER_LINK = import.meta.env.VITE_SERVER_LINK;
 
   const handleCheckout = async () => {
     try {
       const response = await fetch(
-        `http://localhost:${SERVER_PORT}/create-checkout-session`,
+        `https://${SERVER_LINK}/create-checkout-session`,
         {
           method: "POST",
           headers: {

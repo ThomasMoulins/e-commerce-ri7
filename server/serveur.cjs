@@ -1,12 +1,10 @@
-// server/server.js
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const app = express();
-const SERVER_PORT = process.env.SERVER_PORT || 5000;
-const APP_PORT = process.env.APP_PORT || 5173;
+const APP_LINK = process.env.APP_LINK;
 
 // Middleware
 app.use(cors());
@@ -36,8 +34,8 @@ app.post("/create-checkout-session", async (req, res) => {
       payment_method_types: ["card"],
       line_items: lineItems,
       mode: "payment",
-      success_url: `http://localhost:${APP_PORT}/success`, // URL de redirection après succès
-      cancel_url: `http://localhost:${APP_PORT}/cancel`, // URL de redirection après annulation
+      success_url: `https://${APP_LINK}/success`, // URL de redirection après succès
+      cancel_url: `https://${APP_LINK}/cancel`, // URL de redirection après annulation
     });
 
     res.json({ id: session.id });
@@ -53,6 +51,4 @@ app.post("/create-checkout-session", async (req, res) => {
   }
 });
 
-app.listen(SERVER_PORT, () => {
-  console.log(`Serveur démarré sur le port ${SERVER_PORT}`);
-});
+app.listen();
